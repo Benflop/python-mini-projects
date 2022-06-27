@@ -21,13 +21,41 @@ def month_days(month, leap_year):
     elif month == 2 and (not leap_year):
         return 28
 
+validation = False
 
-name = input("input your name: ")
-age = input("input your age: ")
+while(validation == False):
+
+    name = input("input your name: ")
+    if(name.isalpha() == False):
+        print('Please enter alphabet characters for Name')
+        continue
+
+    dayInput = input('input date of birth: ')
+    if(dayInput.isnumeric() == False):
+        print('Please enter a non-decimal digit for Day')
+        continue
+    if(int(dayInput) > 32):
+        print('Please enter a day lesser than 32')
+        continue
+
+    monthInput = input('input month of birth: ')
+    if(monthInput.isnumeric() == False):
+        print('Please enter a non-decimal digit for Month')
+        continue
+    if(int(monthInput) > 13):
+        print('Please enter a month lesser than 12')
+        continue   
+
+    age = input("input your age: ")
+    if(age.isnumeric() == False):
+        print('Please enter a non-decimal digit for Age')
+        continue
+    
+    validation = True
+
 localtime = time.localtime(time.time())
-
-year = int(age)
-month = year * 12 + localtime.tm_mon
+year = int(age) - 1
+month = year * 12 + int(monthInput)
 day = 0
 
 begin_year = int(localtime.tm_year) - year
